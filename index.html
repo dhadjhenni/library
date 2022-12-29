@@ -4,7 +4,12 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="styles/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="styles/styles.css" />
 
         <title>Library</title>
 
@@ -19,7 +24,54 @@
     <body>
         <!-- START : content -->
         <div id="content">
-            <main></main>
+            <main>
+                <header>
+                    <h1>📚 Manage your library</h1>
+                </header>
+
+                <section class="core">
+                    <table id="library">
+                        <thead>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Number of pages</th>
+                            <th>Date of publication</th>
+                            <th>Read</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <button class="btn">Add a book</button>
+                </section>
+
+                <div class="modal">
+                    <button id="close" class="btn"></button>
+                    <form id="form-adding-book" action="#">
+                        <div class="field">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" placeholder="" required />
+                        </div>
+
+                        <div class="field">
+                            <label for="author">author</label>
+                            <input type="text" id="author" name="author" placeholder="" required />
+                        </div>
+
+                        <div class="field">
+                            <label for="year">year</label>
+                            <input type="date" id="year" name="year" placeholder="" required />
+                        </div>
+
+                        <div class="field">
+                            <label for="pages">pages</label>
+                            <input type="number" id="pages" name="pages" placeholder="" required />
+                        </div>
+
+                        <button id="add" class="btn" type="submit">Add this book</button>
+                    </form>
+                </div>
+            </main>
 
             <footer>
                 <p>
@@ -31,6 +83,112 @@
         <!-- END : content -->
 
         <!-- START : scripts -->
-        <script></script>
+        <script>
+            const libraryTable = document.querySelector('#library tbody');
+            const addBtn = document.querySelector('#add');
+            const inputTitle = document.querySelector('#title');
+            const inputAuthor = document.querySelector('#author');
+            const inputYear = document.querySelector('#year');
+            const inputPages = document.querySelector('#pages');
+            const form = document.querySelector('#form-adding-book');
+            const modal = document.querySelector('.modal');
+
+            let myLibrary = [
+                { title: 'Albert', author: 'Einstein', year: 1879, pages: 1955, read: 'yes' },
+                { title: 'Isaac', author: 'Newton', year: 1643, pages: 1727, read: 'no' },
+            ];
+
+            function Book(title, author, year, pages, read) {
+                this.title = title;
+                this.author = author;
+                this.year = year;
+                this.pages = pages;
+                this.read = read;
+            }
+
+            function addBookToLibrary(title, author, year, pages, read) {
+                //console.log(title, author, year, pages);
+                let newBook = new Book(title, author, year, pages, read);
+
+                myLibrary.push(newBook);
+
+                console.log(newBook);
+                console.log(myLibrary);
+
+                displayLibrary();
+            }
+
+            function removeFromLibrary(x) {
+                myLibrary.splice(x, 1);
+            }
+
+            function displayLibrary() {
+                libraryTable.innerHTML = '';
+                for (let [i, book] of myLibrary.entries()) {
+                    libraryTable.innerHTML +=
+                        '<tr data-id=' +
+                        i +
+                        '><td>' +
+                        book.title +
+                        '</td><td>' +
+                        book.author +
+                        '</td><td>' +
+                        book.year +
+                        '</td><td>' +
+                        book.pages +
+                        '</td><td><a href="#" class="read">' +
+                        book.read +
+                        '</a></td><td><a href="#" class="remove">❌ Remove</a></td></tr>';
+                }
+            }
+
+            function toggleStatus(x) {
+                if (myLibrary[x].read === 'yes') {
+                    myLibrary[x].read = 'no';
+                } else if (myLibrary[x].read === 'no') {
+                    myLibrary[x].read = 'yes';
+                }
+
+                displayLibrary(); //Refresh the library display
+            }
+
+            addBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                let title = inputTitle.value;
+                let author = inputAuthor.value;
+                let year = inputYear.value;
+                let pages = inputPages.value;
+
+                addBookToLibrary(title, author, year, pages);
+
+                form.reset();
+                //modal.close();
+            });
+
+            displayLibrary();
+
+            //removeBtn.forEach((btn) => btn.addEventListener('click', function (e) {}));
+
+            document.body.addEventListener('click', function (event) {
+                if (event.target.className == 'remove') {
+                    let theBook = event.target.parentElement.parentElement.dataset.id;
+
+                    console.log(theBook);
+
+                    removeFromLibrary(theBook);
+
+                    displayLibrary();
+                }
+
+                if (event.target.className == 'read') {
+                    let theBook = event.target.parentElement.parentElement.dataset.id;
+
+                    console.log(theBook);
+
+                    toggleStatus(theBook);
+                }
+            });
+        </script>
     </body>
 </html>
