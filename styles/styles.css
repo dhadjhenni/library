@@ -317,7 +317,6 @@ table .read {
     z-index: 2;
     top: 100px;
     width: 500px;
-    height: 500px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     padding: 40px;
     background: #fff;
@@ -334,6 +333,7 @@ table .read {
     border: 0;
     cursor: pointer;
     border-radius: 50%;
+    transition: all 0.2s ease;
 }
 
 .modal #close:hover {

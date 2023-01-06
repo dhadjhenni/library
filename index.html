@@ -74,7 +74,6 @@
                     <button id="add" class="btn" type="submit">Add this book</button>
                 </form>
             </div>
-            <div class="overlay"></div>
         </main>
 
         <footer>
@@ -169,7 +168,7 @@
             addBookToLibrary(title, author, year, pages);
 
             form.reset();
-            //modal.close();
+            myNewModal.closeModal();
         });
 
         displayLibrary();
@@ -196,31 +195,61 @@
             }
         });
 
-        const modalModule = (modalDiv, closeBtn, openBtn) => {
+        function modalModule(modalDiv, openBtn, closeBtn) {
 
             const modal = document.querySelector(modalDiv);
             const open = document.querySelector(openBtn);
             const close = document.querySelector(closeBtn);
+            const overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            document.body.appendChild(overlay);
 
-            open.onclick = function () {
+            function fnOpen() {
                 modal.style.display = "block";
+                overlay.style.display = "block";
             }
 
-            close.onclick = function () {
+            function fnClose() {
                 modal.style.display = "none";
+                overlay.style.display = "none";
             }
 
             window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
+                if (event.target == overlay) {
+                    fnClose();
                 }
             };
 
+            open.onclick = function () {
+                fnOpen();
+            }
 
-        }
+            close.onclick = function () {
+                fnClose();
+            }
+
+            // Methods
+            this.openModal = function () {
+                fnOpen();
+            }
+
+            this.closeModal = function () {
+                fnClose();
+            }
+
+            this.init = function () {
+
+            }
+
+        };
+
+        const myNewModal = new modalModule('.modal', '.open', '#close');
+        myNewModal.init();
+
+        //console.log(myNewModal);
 
 
-        modalModule('.modal', '#close', '.open');
+        //myNewModal.openModal();
     </script>
 </body>
 
