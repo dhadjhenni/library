@@ -224,9 +224,6 @@ body {
     font-size: 1.2rem;
 }
 
-:root {
-}
-
 /*  =MAIN
 ----------------------------------------------------------------------------- */
 
@@ -295,15 +292,6 @@ table .read {
     font-weight: bold;
 }
 
-.modal {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: #fff;
-    width: 300px;
-    height: 300px;
-}
-
 .btn {
     background: #ffda55;
     color: #000;
@@ -318,6 +306,96 @@ table .read {
 
 .btn:hover {
     opacity: 0.7;
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    z-index: 2;
+    top: 100px;
+    width: 500px;
+    height: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    background: #fff;
+}
+
+.modal #close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: #ccc;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.modal #close:hover {
+    background: #3d61c7;
+    color: #fff;
+}
+
+.modal #close ion-icon {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.modal label {
+    display: block;
+    width: 100%;
+    font-size: 1.7rem;
+    font-weight: bold;
+    padding: 0 0 10px;
+}
+
+.modal .field {
+    padding: 0 0 20px;
+}
+
+.modal input[type='text'] {
+    height: 38px;
+    padding: 0 15px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    width: 80%;
+    font-size: 1.4rem;
+}
+
+.modal input[type='date'],
+.modal input[type='number'] {
+    height: 38px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    font-size: 1.4rem;
+    padding: 0 15px;
+    width: 140px;
+}
+
+.modal input[type='text']:focus,
+.modal input[type='date']:focus,
+.modal input[type='number']:focus {
+    outline: none;
+    border: 2px solid #ffda55;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.4;
+    display: none;
 }
 
 footer {
