@@ -384,6 +384,11 @@ table .read {
     border: 2px solid #ffda55;
 }
 
+input:invalid,
+[aria-invalid='true'] {
+    border-color: hsl(351, 93%, 39%);
+}
+
 .overlay {
     position: absolute;
     z-index: 1;

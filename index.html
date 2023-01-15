@@ -158,18 +158,19 @@
         }
 
         addBtn.addEventListener('click', function (e) {
-            e.preventDefault();
 
             let title = inputTitle.value;
             let author = inputAuthor.value;
             let year = inputYear.value;
             let pages = inputPages.value;
 
-            addBookToLibrary(title, author, year, pages);
+            //addBookToLibrary(title, author, year, pages);
 
-            form.reset();
-            myNewModal.closeModal();
+            //form.reset();
+            //myNewModal.closeModal();
+
         });
+
 
         displayLibrary();
 
