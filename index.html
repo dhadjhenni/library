@@ -97,18 +97,19 @@
         const inputPages = document.querySelector('#pages');
         const form = document.querySelector('#form-adding-book');
 
-
         let myLibrary = [
             { title: 'Albert', author: 'Einstein', year: 1879, pages: 1955, read: 'yes' },
             { title: 'Isaac', author: 'Newton', year: 1643, pages: 1727, read: 'no' },
         ];
 
-        function Book(title, author, year, pages, read) {
-            this.title = title;
-            this.author = author;
-            this.year = year;
-            this.pages = pages;
-            this.read = read;
+        class Book {
+            constructor(title, author, year, pages, read) {
+                this.title = title;
+                this.author = author;
+                this.year = year;
+                this.pages = pages;
+                this.read = read;
+            }
         }
 
         function addBookToLibrary(title, author, year, pages, read) {
@@ -117,8 +118,8 @@
 
             myLibrary.push(newBook);
 
-            console.log(newBook);
-            console.log(myLibrary);
+            //console.log(newBook);
+            //console.log(myLibrary);
 
             displayLibrary();
         }
@@ -164,10 +165,12 @@
             let year = inputYear.value;
             let pages = inputPages.value;
 
-            //addBookToLibrary(title, author, year, pages);
+            addBookToLibrary(title, author, year, pages);
 
-            //form.reset();
-            //myNewModal.closeModal();
+            form.reset();
+            myNewModal.closeModal();
+
+            e.preventDefault();
 
         });
 
